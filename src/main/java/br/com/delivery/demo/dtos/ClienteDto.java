@@ -1,4 +1,8 @@
 package br.com.delivery.demo.dtos;
 
-public record ClienteDto() {
+import jakarta.validation.constraints.NotBlank;
+
+public record ClienteDto(@NotBlank String name,
+                         @NotBlank String endereco,
+                         @NotBlank String telefone) {
 }
