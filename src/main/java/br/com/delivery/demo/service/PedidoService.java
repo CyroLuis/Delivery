@@ -2,6 +2,7 @@ package br.com.delivery.demo.service;
 
 import br.com.delivery.demo.dtos.ItemPedidoDto;
 import br.com.delivery.demo.dtos.PedidoDto;
+import br.com.delivery.demo.dtos.StatusPedidoDto;
 import br.com.delivery.demo.model.Cliente;
 import br.com.delivery.demo.model.ItemPedido;
 import br.com.delivery.demo.model.Pedido;
@@ -62,6 +63,18 @@ public class PedidoService {
         pedido.setItens(itensPedido);
         pedido.setValorTotal(valorTotal); // Exemplo
 
+        return pedidoRepository.save(pedido);
+
+    }
+    public Pedido buscarPorId(Long id) {
+        return pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não foi encontrado"));
+    }
+
+    @Transactional
+    public Pedido atualizarStatus(Long id, StatusPedidoDto statusDto){
+        Pedido pedido = buscarPorId(id);
+        pedido.setStatus(statusDto.novoStatus());
         return pedidoRepository.save(pedido);
     }
 }

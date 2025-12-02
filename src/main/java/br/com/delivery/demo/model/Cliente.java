@@ -2,7 +2,7 @@ package br.com.delivery.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 @AllArgsConstructor
@@ -26,6 +26,7 @@ public class Cliente {
     String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Pedido> pedidos;
 
     public Long getIdCliente() {
